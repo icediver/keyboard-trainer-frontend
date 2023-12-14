@@ -1,0 +1,12 @@
+.input {
+	@apply h-12;
+	label {
+		@apply text-indigo-900;
+	}
+	
+	@apply relative block text-amber-700 text-center mt-2;
+	> input {
+		@apply block w-full rounded h-8 text-center bg-indigo-400 border-none outline-none;
+	}
+	
+}

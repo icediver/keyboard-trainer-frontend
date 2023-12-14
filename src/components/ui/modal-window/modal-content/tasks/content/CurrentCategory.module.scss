@@ -1,0 +1,28 @@
+.current {
+	user-select: none;
+	
+	h1 {
+		@apply pb-2;
+	}
+	
+	@apply p-5;
+	.level {
+		@apply pl-5 cursor-pointer;
+		.title {
+			@apply flex justify-between;
+			.icon {
+				//				@apply ;
+				&:hover {
+					@apply text-amber-700;
+				}
+			}
+		}
+		
+		.exercises {
+			@apply pl-5 cursor-pointer;
+			&:hover {
+				@apply text-amber-700;
+			}
+		}
+	}
+}

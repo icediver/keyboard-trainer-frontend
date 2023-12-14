@@ -1,0 +1,10 @@
+.container {
+	@apply w-[900px] grid grid-cols-3 px-4 py-3 m-auto;
+	.rightColumn {
+		@apply grid grid-cols-5;
+	}
+	
+	.icons {
+		@apply text-amber-700 m-auto text-opacity-70 self-center cursor-pointer;
+	}
+}

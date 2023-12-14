@@ -1,0 +1,32 @@
+.background {
+	@apply fixed top-0 left-0  w-screen h-screen bg-black bg-opacity-70 flex justify-center items-center select-none;
+	
+	.modalWrapper {
+		@apply w-[800px] h-[400px] bottom-32 shadow-[rgba(180,83,9,0.6)_0_8px_24px] rounded bg-indigo-300 text-indigo-900  relative z-50;
+	}
+	
+	
+	.modalContent {
+		@apply flex flex-col justify-center items-center text-indigo-900 ;
+		p {
+			@apply mb-1;
+		}
+		
+		button {
+			@apply py-3 px-6 rounded bg-indigo-900 mt-10 border-none text-indigo-200;
+			&:hover {
+				@apply bg-opacity-80;
+			}
+		}
+	}
+	
+	.closeModalButton {
+		@apply cursor-pointer absolute top-5 right-5  p-0 z-10;
+		&:hover {
+			@apply text-amber-700;
+		}
+	}
+}
+
+
+

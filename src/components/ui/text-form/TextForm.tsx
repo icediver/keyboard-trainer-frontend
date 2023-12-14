@@ -1,0 +1,93 @@
+import { useAuth } from '@/hooks/useAuth';
+import { useExercise } from '@/hooks/useExercises';
+import { typingText } from 'backend-temp-data/typing-text';
+import { FC, useEffect } from 'react';
+import { useGlobalContext } from '../../../contexts/current-key-context';
+import Dashboard from './dashboard/Dashboard';
+import { IIndicators } from './dashboard/indicators.interface';
+import TextBlock from './text-block/TextBlock';
+import styles from './TextForm.module.scss';
+import TypingTextarea from './typing-textarea/TypingTextarea';
+import { useCheckChar } from './useCheckChar';
+import { useTextPrepare } from './useTextPrepare';
+
+interface ITextForm {
+	modalOpen: boolean;
+	idExercise: number;
+}
+
+const TextForm: FC<ITextForm> = ({ modalOpen, idExercise }) => {
+	const {
+		context: { pressedKey }
+	} = useGlobalContext();
+	const { user } = useAuth();
+	const { data } = useExercise(idExercise);
+
+	console.log(idExercise);
+
+	const currentExercise =
+		user && data?.data?.exercise
+			? data?.data?.exercise
+			: 'Welcome to the keyTrainer\n please log in, for more features';
+	//
+	const { typingArray } = useTextPrepare(currentExercise);
+	// const { typingArray } = useTextPrepare(typingText);
+
+	const {
+		compareLetter,
+		mistakes,
+		countSymbols,
+		totalSymbols,
+		totalRows,
+		typingRow,
+		index,
+		textState
+	} = useCheckChar();
+
+	useEffect(() => {
+		if (!modalOpen && pressedKey) compareLetter(pressedKey);
+	}, [pressedKey]);
+
+	const indicators: IIndicators = {
+		countSymbols,
+		mistakes: mistakes,
+		totalSymbols,
+		totalRows,
+		currentRow: typingRow
+	};
+
+	return (
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<div>
+					<span className={'text-amber-700  text-opacity-60'}>
+						{typingArray[typingRow].slice(0, index)}
+					</span>
+					<span className={'text-2xl text-indigo-900'}>
+						[
+						<span className={'text-red-700  tracking-tighter'}>
+							{typingArray[typingRow][index]}
+						</span>
+						]
+					</span>
+					<span>{typingArray[typingRow].slice(index + 1)}</span>
+				</div>
+				<div className={'text-amber-700'}>
+					{data?.data?.level?.category?.title} Lv:{' '}
+					{data?.data?.level.levelNumber} Ex: {data?.data.id}
+				</div>
+			</div>
+			<TextBlock
+				index={index}
+				typingArray={typingArray}
+				typingRow={typingRow}
+			/>
+			<TypingTextarea typingRow={typingRow} value={textState} />
+			<div className={styles.footer}>
+				<Dashboard {...indicators} />
+			</div>
+		</div>
+	);
+};
+
+export default TextForm;

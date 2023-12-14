@@ -1,0 +1,66 @@
+.content {
+	@apply grid grid-cols-2 h-full;
+	form {
+		@apply px-10;
+		h1 {
+			@apply text-xl font-bold text-center my-6;
+		}
+		
+		.select {
+			@apply flex justify-between mb-5;
+			select {
+				@apply w-32 bg-indigo-400 border-none outline-none rounded-md;
+			}
+		}
+		
+		
+		.input {
+			@apply h-12;
+			label {
+				@apply text-indigo-900;
+			}
+			
+			@apply relative block text-amber-700 text-center mt-2;
+			> input {
+				@apply block w-full rounded h-8 text-center bg-indigo-400 border-none outline-none;
+			}
+			
+		}
+		
+		.buttonContainer {
+			@apply flex justify-between items-center cursor-pointer mt-10;
+			.link {
+				@apply text-indigo-600 text-opacity-40;
+				&:hover {
+					@apply text-red-600;
+				}
+				
+			}
+			
+			button[type="submit"],
+			input[type="submit"] {
+				@apply bg-indigo-900 text-gray-300 px-4 py-2 rounded-md cursor-pointer;
+			}
+			
+			button[type="submit"]:hover,
+			input[type="submit"]:hover {
+				@apply bg-indigo-600
+			}
+			
+			button[type="submit"]:active,
+			input[type="submit"]:active,
+			input[type="submit"]:active {
+				@apply transition-all duration-300 translate-y-1 opacity-80;
+			}
+		}
+		
+	}
+	
+	.rightSide {
+		@apply relative w-full bg-indigo-200 flex justify-center items-center text-indigo-300;
+		> svg {
+			@apply text-[256px];
+		}
+	}
+	
+}
