@@ -10,7 +10,6 @@ import { PropsWithChildren } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import AuthProvider from "./auth-provider/AuthProvider";
-import { AppProvider } from "@/contexts/current-key-context";
 
 import { persistor, store } from "@/store/store";
 
@@ -27,9 +26,7 @@ export default function Providers({ children }: PropsWithChildren<unknown>) {
     <QueryClientProvider client={queryClient}>
       <ReduxProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <AppProvider>
-            <AuthProvider>{children} </AuthProvider>
-          </AppProvider>
+          <AuthProvider>{children} </AuthProvider>
         </PersistGate>
       </ReduxProvider>
     </QueryClientProvider>

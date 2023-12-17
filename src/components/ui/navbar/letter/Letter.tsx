@@ -1,19 +1,17 @@
-import { FC, useEffect, useState } from 'react';
-import { useGlobalContext } from '../../../../contexts/current-key-context';
-import styles from './Letter.module.scss';
+import { FC, useEffect, useState } from "react";
+import styles from "./Letter.module.scss";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 
 const Letter: FC = () => {
-	const {
-		context: { pressedKey }
-	} = useGlobalContext();
+  const { pressedKey } = useTypedSelector((state) => state.pressedKey);
 
-	const [key, setKey] = useState('');
+  const [key, setKey] = useState("");
 
-	useEffect(() => {
-		if (pressedKey?.key) setKey(pressedKey.key);
-	}, [pressedKey]);
+  useEffect(() => {
+    if (pressedKey?.key) setKey(pressedKey.key);
+  }, [pressedKey]);
 
-	return <div className={styles.letter}>{key}</div>;
+  return <div className={styles.letter}>{key}</div>;
 };
 
 export default Letter;

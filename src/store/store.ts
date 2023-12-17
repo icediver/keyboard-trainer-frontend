@@ -10,11 +10,15 @@ import {
 } from "redux-persist";
 
 import { userSlice } from "./user/user.slice";
+import { timerSlice } from "./timer/timer.slice";
+import { pressedKeySlice } from "./pressed-key/pressedKey.slice";
 
 const isClient = typeof window !== "undefined";
 
 const combinedReducers = combineReducers({
   user: userSlice.reducer,
+  timer: timerSlice.reducer,
+  pressedKey: pressedKeySlice.reducer,
 });
 
 let mainReducer = combinedReducers;
@@ -24,9 +28,9 @@ if (isClient) {
   const storage = require("redux-persist/lib/storage").default;
 
   const persistConfig = {
-    key: "amazon-v2",
+    key: "keyboard-trainer",
     storage,
-    whitelist: ["cart"],
+    whitelist: ["pressedKey"],
   };
 
   mainReducer = persistReducer(persistConfig, combinedReducers);

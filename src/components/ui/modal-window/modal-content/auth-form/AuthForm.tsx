@@ -25,14 +25,12 @@ const AuthForm: FC<{ setIsOpenOptions: (show: boolean) => void }> = ({
     formState: { errors },
   } = useForm<IAuth>({ mode: "onChange" });
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const { user, setUser } = useAuth();
   const { login, register } = useActions();
 
   const onSubmit: SubmitHandler<IAuth> = (data) => {
     if (type === "login") login(data);
     else if (type === "register") register(data);
-    setIsShow(false);
+    setIsOpenOptions(false);
     reset();
   };
 

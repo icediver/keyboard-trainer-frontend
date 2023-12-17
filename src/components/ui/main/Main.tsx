@@ -1,16 +1,13 @@
-import { FC } from 'react';
-import { useGlobalContext } from '../../../contexts/current-key-context';
-import TextForm from '../text-form/TextForm';
-import styles from './Main.module.scss';
+import { FC } from "react";
+import TextForm from "../text-form/TextForm";
+import styles from "./Main.module.scss";
 
 const Main: FC<{ modalOpen: boolean }> = ({ modalOpen }) => {
-	const { context } = useGlobalContext();
-
-	return (
-		<div className={styles.main}>
-			<TextForm modalOpen={modalOpen} idExercise={context.currentExerciseId} />
-		</div>
-	);
+  return (
+    <div className={styles.main}>
+      <TextForm modalOpen={modalOpen} idExercise={1} />
+    </div>
+  );
 };
 
 export default Main;

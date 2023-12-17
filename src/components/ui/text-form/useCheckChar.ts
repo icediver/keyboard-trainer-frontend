@@ -1,51 +1,40 @@
 import { useState } from "react";
 import useSound from "use-sound";
-import { typingText } from "../../../backend-temp-data/typing-text";
-import {
-  IPressedKey,
-  useGlobalContext,
-} from "../../../contexts/current-key-context";
-import { useTextPrepare } from "./useTextPrepare";
+import { IPressedKey } from "../../../contexts/current-key-context";
+import { textPrepare } from "@/helpers/textPrepare";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { useActions } from "@/hooks/useActions";
 
 let count = 0;
 
-export const useCheckChar = () => {
+export const useCheckChar = (typingText: string) => {
+  const { startTimer, stopTimer } = useActions();
   const [textState, setTextState] = useState<string>("");
   const [play] = useSound("/error.mp3");
-  const { typingArray } = useTextPrepare(typingText);
+  const { typingArray } = textPrepare(typingText);
+
   const totalSymbols = typingArray.join(" ").length - (typingArray.length - 1);
 
-  const {
-    context: { isTimerStarted },
-    setContext,
-  } = useGlobalContext();
+  const { isTimerStarted } = useTypedSelector((state) => state.timer);
 
   const [typingRow, setTypingRow] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
-  const [typingString, setTypingString] = useState<string>(
-    typingArray[typingRow],
-  );
 
   const [errorCount, setErrorCount] = useState<number>(0);
 
   const compareLetter = (pressedKey: IPressedKey): void => {
+    let typingString = typingArray[typingRow];
+
     if (
       index >= typingString.length &&
       (pressedKey.code === "Enter" || pressedKey.code === "Space")
     ) {
       if (typingRow < typingArray.length - 1) {
-        let rowIndex = typingRow + 1;
-        setTypingRow(rowIndex);
-        setTypingString(typingArray[rowIndex]);
+        setTypingRow(typingRow + 1);
         setTextState(textState + "\n");
         setIndex(0);
-
-        if (rowIndex >= typingArray.length - 1) {
-          setContext((prevCtx) => ({
-            ...prevCtx,
-            isTimerStarted: false,
-          }));
-        }
+      } else {
+        stopTimer();
       }
     }
 
@@ -55,12 +44,7 @@ export const useCheckChar = () => {
       typingString[index] !== undefined
     ) {
       if (!isTimerStarted) {
-        setContext((prevCtx) => {
-          return {
-            ...prevCtx,
-            isTimerStarted: true,
-          };
-        });
+        startTimer();
       }
       setTextState(textState + pressedKey.key);
       count = count + 1;
