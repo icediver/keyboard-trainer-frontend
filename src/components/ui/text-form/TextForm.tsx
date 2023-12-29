@@ -9,9 +9,7 @@ import TypingTextarea from "./typing-textarea/TypingTextarea";
 import { useCheckChar } from "./useCheckChar";
 import { textPrepare } from "@/helpers/textPrepare";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
-
-const welcomeString =
-  "Welcome to the keyTrainer\nplease log in, for more features";
+import { WELCOME } from "@/constants/welcome.contstant";
 
 interface ITextForm {
   modalOpen: boolean;
@@ -19,7 +17,7 @@ interface ITextForm {
 }
 
 const TextForm: FC<ITextForm> = ({ modalOpen, idExercise }) => {
-  const [currentExercise, setCurrentExercise] = useState(welcomeString);
+  const [currentExercise, setCurrentExercise] = useState(WELCOME);
   const { pressedKey } = useTypedSelector((state) => state.pressedKey);
   const { user } = useAuth();
   const { data } = useExercise(idExercise);
@@ -28,7 +26,7 @@ const TextForm: FC<ITextForm> = ({ modalOpen, idExercise }) => {
     if (user && data?.exercise) {
       setCurrentExercise(data?.exercise);
     } else {
-      setCurrentExercise(welcomeString);
+      setCurrentExercise(WELCOME);
     }
   }, [data?.exercise, user]);
 
