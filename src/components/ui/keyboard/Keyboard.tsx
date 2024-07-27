@@ -5,7 +5,8 @@ import { IKeyButton } from "../../../types/key-button.interface";
 import styles from "./Keyboard.module.scss";
 import { dataKeys } from "./keys-data";
 import { useActions } from "@/hooks/useActions";
-import { IPressedKey } from "@/contexts/current-key-context";
+import { IKey, IPressedKey } from "@/store/pressed-key/pressedKey.interface";
+// import { IPressedKey } from "@/contexts/current-key-context";
 
 let letterIndex = 0;
 const Keyboard: FC<{ modalOpen: boolean }> = ({ modalOpen }) => {
@@ -14,12 +15,12 @@ const Keyboard: FC<{ modalOpen: boolean }> = ({ modalOpen }) => {
 
   const keydownHandler = (event: KeyboardEvent): void => {
     if (!modalOpen) event.preventDefault();
-    const keyButton = listRefs.current.find(
-      (ref) => ref?.dataset.key?.includes(event.code),
+    const keyButton = listRefs.current.find((ref) =>
+      ref?.dataset.key?.includes(event.code),
     );
 
     if (keyButton) {
-      const pressedKey: IPressedKey = {
+      const pressedKey: IKey = {
         key: event.key,
         code: event.code,
       };

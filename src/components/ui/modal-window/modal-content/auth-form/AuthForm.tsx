@@ -53,7 +53,7 @@ const AuthForm: FC<{ setIsOpenOptions: (show: boolean) => void }> = ({
                 },
               })}
               placeholder={"Email"}
-              error={errors.email?.message}
+              error={errors.email}
             />
           </div>
           <div className={styles.input}>
@@ -68,7 +68,7 @@ const AuthForm: FC<{ setIsOpenOptions: (show: boolean) => void }> = ({
               })}
               type="password"
               placeholder="Password"
-              error={errors.password?.message}
+              error={errors.password}
             />
           </div>
         </div>

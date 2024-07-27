@@ -1,9 +1,9 @@
 import { useState } from "react";
 import useSound from "use-sound";
-import { IPressedKey } from "../../../contexts/current-key-context";
 import { textPrepare } from "@/helpers/textPrepare";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { useActions } from "@/hooks/useActions";
+import { IPressedKey } from "@/store/pressed-key/pressedKey.interface";
 
 let count = 0;
 
@@ -22,7 +22,7 @@ export const useCheckChar = (typingText: string) => {
 
   const [errorCount, setErrorCount] = useState<number>(0);
 
-  const compareLetter = (pressedKey: IPressedKey): void => {
+  const compareLetter = ({ pressedKey }: IPressedKey): void => {
     let typingString = typingArray[typingRow];
 
     if (

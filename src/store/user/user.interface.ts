@@ -1,6 +1,8 @@
-import { IUser } from "@/types/user.interface";
+// import { IUser } from "@/types/user.interface";
 
-export interface IUserState {
+import { IUser } from "@/types/interfaces/user.interface";
+
+export interface IUserState extends IUser {
   email: string;
   isAdmin: boolean;
 }

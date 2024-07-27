@@ -44,7 +44,7 @@ const TextForm: FC<ITextForm> = ({ modalOpen, idExercise }) => {
   } = useCheckChar(currentExercise);
 
   useEffect(() => {
-    if (!modalOpen && pressedKey) compareLetter(pressedKey);
+    if (!modalOpen && pressedKey) compareLetter({ pressedKey: pressedKey });
   }, [pressedKey]);
 
   const indicators: IIndicators = {

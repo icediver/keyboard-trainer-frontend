@@ -17,7 +17,7 @@ const CurrentCategory: FC<{ currentCategoryId: number }> = ({
     setOpenLevels(index);
   };
 
-  const currentCategoryExercises = user?.solvedExercises.filter(
+  const currentCategoryExercises = user?.solvedExercises?.filter(
     (el) => el.level.category.id === currentCategoryId,
   );
 
