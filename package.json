@@ -1,8 +1,11 @@
 {
-  "name": "client",
+  "homepage": "https://github.com/icediver/keyboard-trainer-frontend",
+  "name": "keyboard-trainer-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,6 +17,7 @@
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
+    "gh-pages": "^6.1.1",
     "js-cookie": "^3.0.5",
     "next": "14.0.4",
     "react": "^18",
